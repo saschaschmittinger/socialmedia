@@ -46,6 +46,7 @@ sdist/
 var/
 static/
 node_modules/
+
 *.egg-info/
 .installed.cfg
 *.egg
