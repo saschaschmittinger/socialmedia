@@ -35,7 +35,9 @@
       class="lg:p-12 max-w-md lg:max-w-xl lg:my-0 my-12 mx-auto p-6 space-y-"
     >
     <div>
+
       {% for message in messages %}
+
       <div role="alert" class="alert alert-{{ message.tags }} mb-4">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +52,9 @@
         </svg>
           <span>{{ message }}</span>
       </div>
+      
      {% endfor %}
+
     </div>
       <h1 class="lg:text-3xl text-xl font-semibold mb-6 text-white text-center">Registrieren</h1>
       <!--<p class="mb-2 text-black text-lg"> Register to manage your account </p>-->

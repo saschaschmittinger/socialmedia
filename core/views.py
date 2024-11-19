@@ -4,9 +4,10 @@ from django.contrib import messages
 
 
 def home(request):
-    title = "SSC SocialMedia"
-    context = {"title": title}
-    return render(request, "index.html", context)
+    title: str = "SSC SocialMedia"
+    template: str = "index.html"
+    context: dict = {"title": title}
+    return render(request, template, context)
 
 
 def signup(request):
