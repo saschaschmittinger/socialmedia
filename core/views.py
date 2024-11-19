@@ -23,16 +23,17 @@ def signup(request):
                 messages.info(request, "E-Mail Adresse existiert bereits")
                 return redirect("core:signup_view")
             elif User.objects.filter(username=username).exists():
-                messages.info(request, "Benutzername existiert bereits")
+                messages.error(request, "Benutzername existiert bereits")
                 return redirect("core:signup_view")
             else:
                 user = User.objects.create_user(
                     username=username, email=email, password=password
                 )
                 user.save()
-                return redirect("core:home_view")
+                messages.success(request, "Account wurde erfolgreich angelegt")
+                return redirect("core:signup_view")
         else:
-            messages.info(request, "Passwörter stimmen nicht überein")
+            messages.error(request, "Passwörter stimmen nicht überein")
             return redirect("core:signup_view")
 
     context = {"title": title}

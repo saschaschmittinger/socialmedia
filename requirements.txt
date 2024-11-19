@@ -12,3 +12,9 @@ urllib3==2.2.3
 
 
 # Time: 01:22:00
+
+
+# npm run watch:css
+
+
+# npx tailwindcss -i ./static/assets/css/input.css -o ./static/assets/css/tailwind.css --watch

@@ -6,21 +6,21 @@
 
 <div id="wrapper" class="flex flex-col justify-between h-screen">
   <!-- header-->
-  <div class="bg-white py-4 shadow dark:bg-gray-800">
+  <div class="bg-white py-4 shadow ">
     <div class="max-w-6xl mx-auto">
       <div class="flex items-center lg:justify-between justify-around">
         <div class="flex gap-2 items-center">
         <img src="{% static "assets/images/logo.svg" %}" alt="logo" class="w-6 h-6">
         <a href="{% url "core:home_view" %}">
-          <b><h1 style="font-size: 1.5rem">Sascha Schmittinger</h1></b>
+          <b><h1 class="bg-gradient-to-br from-yellow-600 via-orange-500 to-yellow-600 bg-clip-text text-transparent" style="font-size: 1.5rem">Sascha Schmittinger</h1></b>
         </a>
       </div>
         <div
-          class="capitalize flex font-semibold hidden lg:block my-2 space-x-3 text-center text-sm"
+          class="capitalize flex font-semibold  lg:block my-2 space-x-3 text-center text-sm"
         >
           <a
             href="signin.html"
-            class="bg-gradient-to-br from-pink-500 to-red-400 px-6 py-3 rounded-md shadow text-white hover:text-white hover:shadow-2xl"
+            class="bg-gradient-to-br from-yellow-600 via-orange-500 to-yellow-600 px-6 py-3 rounded-md shadow text-white hover:text-white hover:shadow-2xl"
             >Login</a
           >
         </div>
@@ -32,21 +32,29 @@
 
   <div>
     <div
-      class="lg:p-12 max-w-md max-w-xl lg:my-0 my-12 mx-auto p-6 space-y-"
+      class="lg:p-12 max-w-md lg:max-w-xl lg:my-0 my-12 mx-auto p-6 space-y-"
     >
-      <h1 class="lg:text-3xl text-xl font-semibold mb-6">Registrieren</h1>
+    <div>
+      {% for message in messages %}
+      <div role="alert" class="alert alert-{{ message.tags }} mb-4">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          class="h-6 w-6 shrink-0 stroke-current">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+          <span>{{ message }}</span>
+      </div>
+     {% endfor %}
+    </div>
+      <h1 class="lg:text-3xl text-xl font-semibold mb-6 text-white text-center">Registrieren</h1>
       <!--<p class="mb-2 text-black text-lg"> Register to manage your account </p>-->
 
-      <div>
-        <style>
-            h5{
-              color:red;
-            }
-        </style>
-        {% for message in messages %}
-            <h5>{{ message }} </h5>
-        {% endfor %}
-      </div>
 
       <form method='POST'>
         {% csrf_token %}
@@ -59,28 +67,28 @@
           type="text"
           placeholder="Benutzername"
           name='username'
-          class="bg-gray-200 mb-2 shadow-none dark:bg-gray-800"
+          class="bg-gray-200 mb-2 shadow-none "
           style="border: 1px solid #d3d5d8 !important"
         />
         <input
           type="email"
           name='email'
           placeholder="E-Mail Adresse"
-          class="bg-gray-200 mb-2 shadow-none dark:bg-gray-800"
+          class="bg-gray-200 mb-2 shadow-none "
           style="border: 1px solid #d3d5d8 !important"
         />
         <input
           type="password"
           name='password'
           placeholder="Passwort"
-          class="bg-gray-200 mb-2 shadow-none dark:bg-gray-800"
+          class="bg-gray-200 mb-2 shadow-none "
           style="border: 1px solid #d3d5d8 !important"
         />
         <input
           type="password"
           name="password2"
           placeholder="Passwort wiederholen"
-          class="bg-gray-200 mb-2 shadow-none dark:bg-gray-800"
+          class="bg-gray-200 mb-2 shadow-none "
           style="border: 1px solid #d3d5d8 !important"
         />
         {% comment %} <div class="flex justify-start my-4 space-x-1">
@@ -94,7 +102,7 @@
         </div> {% endcomment %}
         <button
           type="submit"
-          class="bg-gradient-to-br from-pink-500 py-3 rounded-md text-white text-xl to-red-400 w-full mt-2"
+          class="bg-gradient-to-br from-yellow-600 via-orange-500 to-yellow-600 py-3 rounded-md text-white text-xl  w-full mt-2 hover:shadow-2xl"
         >
         Registrieren
         </button>
