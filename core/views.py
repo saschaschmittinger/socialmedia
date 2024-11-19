@@ -23,7 +23,7 @@ def signup(request):
                 messages.info(request, "E-Mail Adresse existiert bereits")
                 return redirect("core:signup_view")
             elif User.objects.filter(username=username).exists():
-                messages.error(request, "Benutzername existiert bereits")
+                messages.info(request, "Benutzername existiert bereits")
                 return redirect("core:signup_view")
             else:
                 user = User.objects.create_user(
