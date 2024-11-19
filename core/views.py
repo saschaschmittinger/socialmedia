@@ -30,7 +30,10 @@ def signup(request):
                     username=username, email=email, password=password
                 )
                 user.save()
-                return redirect("core:signup_view")
+                return redirect("core:home_view")
+        else:
+            messages.info(request, "Passwörter stimmen nicht überein")
+            return redirect("core:signup_view")
 
     context = {"title": title}
     return render(request, "signup.html", context)
