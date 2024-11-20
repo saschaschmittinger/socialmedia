@@ -30,6 +30,7 @@ def settings(request):
             user_profile.bio = bio
             user_profile.location = location
             user_profile.save()
+            messages.success(request, "Daten wurden erfolgreich gespeichert")
 
         if request.FILES.get("image") != None:
             image = request.FILES.get("image")
