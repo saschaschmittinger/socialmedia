@@ -120,6 +120,9 @@ STATICFILES_DIRS = [
 STATIC_ROOT = "static_root"
 MEDIA_URL = "media/"
 MEDIA_ROOT = MY_MEDIA_FILES / "media"
+LOGIN_REDIRECT_URL = "/"
+LOGIN_URL = "/login"
+LOGOUT_REDIRECT_URL = "/login"
 
 
 # Default primary key field type

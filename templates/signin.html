@@ -55,7 +55,8 @@
 
 
       <h1 class="lg:text-3xl text-xl font-semibold mb-6 text-center">Log in</h1>
-      <form action="index.html">
+      <form method="POST">
+        {% csrf_token %}
         <input
           type="text"
           name="username"

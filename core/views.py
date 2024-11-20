@@ -56,5 +56,18 @@ def signup(request):
 def login_view(request):
     title: str = "SSC Login"
     template: str = "signin.html"
+
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
+
+        user = auth.authenticate(username=username, password=password)
+
+        if user is not None:
+            auth.login(request, user)
+            return redirect("core:home_view")
+        else:
+            messages.error(request, "bitte überprüfen Sie Benutzername und Passwort")
+
     context: dict = {"title": title}
     return render(request, template, context)
