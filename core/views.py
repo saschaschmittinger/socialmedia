@@ -1,12 +1,22 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
+from django.contrib.auth.decorators import login_required
 from .models import Profile
 from django.contrib import messages
 
 
+@login_required
 def home(request):
     title: str = "SSC SocialMedia"
     template: str = "index.html"
+    context: dict = {"title": title}
+    return render(request, template, context)
+
+
+@login_required
+def settings(request):
+    title: str = "SSC Settings"
+    template: str = "setting.html"
     context: dict = {"title": title}
     return render(request, template, context)
 
@@ -82,6 +92,7 @@ def login_view(request):
     return render(request, template, context)
 
 
+@login_required
 def logout(request):
     auth.logout(request)
     messages.success(request, "Sie wurden erfolgreich abgemeldet")

@@ -9,9 +9,12 @@
         <div class="left-side">
             <!-- Logo -->
             <div id="logo" class=" uk-hidden@s">
-                <a href="home.html">
-                    <b><h1 style="text-transform: uppercase;">Social Book</h1></b>
-                </a>
+                <div class="flex gap-2 items-center -ml-5">
+                    <img src="{% static "assets/images/logo.svg" %}" alt="logo" class="w-5 h-5">
+                    <a href="{% url "core:home_view" %}">
+                      <b><h1 class="font-bold bg-gradient-to-br from-yellow-600 via-orange-500 to-yellow-600 bg-clip-text text-transparent">Sascha Schmittinger</h1></b>
+                    </a>
+                  </div>
             </div>
 
             <!--<div class="triger" uk-toggle="target: #wrapper ; cls: sidebar-active">
@@ -159,10 +162,10 @@
             </a>
             <div uk-drop="mode: click;offset:9" class="header_dropdown profile_dropdown border-t">
                 <ul>
-                    <li><a href="setting.html"> Account setting </a> </li>
-                    <li><a href="explore.html">explore </a> </li>
+                    <li><a href="#"> Account setting </a> </li>
+                    <li><a href="#">explore </a> </li>
                     <li><a href="#"> Help </a> </li>
-                    <li><a href="signin.html"> Log Out</a></li>
+                    <li><a href="{% url "core:logout_view" %}"> Log Out</a></li>
                 </ul>
             </div>
 
