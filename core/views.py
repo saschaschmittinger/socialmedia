@@ -17,7 +17,33 @@ def home(request):
 def settings(request):
     title: str = "SSC Settings"
     template: str = "setting.html"
-    context: dict = {"title": title}
+
+    user_profile = Profile.objects.get(user=request.user)
+
+    if request.method == "POST":
+        if request.FILES.get("image") == None:
+            image = user_profile.profile_img
+            bio = request.POST["bio"]
+            location = request.POST["location"]
+
+            user_profile.profile_img = image
+            user_profile.bio = bio
+            user_profile.location = location
+            user_profile.save()
+
+        if request.FILES.get("image") != None:
+            image = request.FILES.get("image")
+            bio = request.POST["bio"]
+            location = request.POST["location"]
+
+            user_profile.profile_img = image
+            user_profile.bio = bio
+            user_profile.location = location
+            user_profile.save()
+            messages.success(request, "Daten wurden erfolgreich gespeichert")
+        return redirect("core:settings")
+
+    context: dict = {"title": title, "user_profile": user_profile}
     return render(request, template, context)
 
 
@@ -47,6 +73,9 @@ def signup(request):
                     username=username, email=email, password=password
                 )
                 user.save()
+                # Login and redirect to settings
+                user_login = auth.authenticate(username=username, password=password)
+                auth.login(request, user_login)
                 messages.success(request, "Account wurde erfolgreich angelegt")
 
                 user_model = User.objects.get(username=username)
@@ -54,7 +83,7 @@ def signup(request):
                     user=user_model, id_user=user_model.id
                 )
                 new_profile.save()
-                return redirect("core:signup_view")
+                return redirect("core:settings")
 
         elif password == "" and password2 == "":
             messages.error(request, "Bitte alle Felder ausfüllen!")
