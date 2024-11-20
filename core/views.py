@@ -15,6 +15,10 @@ def signup(request):
     title: str = "SSC Sign Up"
     template: str = "signup.html"
 
+    if request.user.is_authenticated:
+        messages.info(request, "Sie sind bereits registriert.")
+        return redirect("core:home_view")
+
     if request.method == "POST":
         username = request.POST["username"]
         email = request.POST["email"]
@@ -57,6 +61,10 @@ def login_view(request):
     title: str = "SSC Login"
     template: str = "signin.html"
 
+    if request.user.is_authenticated:
+        messages.info(request, "Sie sind bereits angemeldet.")
+        return redirect("core:home_view")
+
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]
@@ -65,9 +73,16 @@ def login_view(request):
 
         if user is not None:
             auth.login(request, user)
+            messages.success(request, "Sie wurden erfolgreich angemeldet")
             return redirect("core:home_view")
         else:
             messages.error(request, "bitte überprüfen Sie Benutzername und Passwort")
 
     context: dict = {"title": title}
     return render(request, template, context)
+
+
+def logout(request):
+    auth.logout(request)
+    messages.success(request, "Sie wurden erfolgreich abgemeldet")
+    return redirect("core:login_view")
