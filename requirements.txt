@@ -18,3 +18,5 @@ urllib3==2.2.3
 
 
 # npx tailwindcss -i ./static/assets/css/input.css -o ./static/assets/css/tailwind.css --watch
+
+ 

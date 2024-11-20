@@ -37,26 +37,26 @@
     <div>
 
       {% for message in messages %}
-
+      
       <div role="alert" class="alert alert-{{ message.tags }} mb-4">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          class="h-6 w-6 shrink-0 stroke-current">
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-        </svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            class="h-6 w-6 shrink-0 stroke-current">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
           <span>{{ message }}</span>
       </div>
-      
+   
      {% endfor %}
 
     </div>
-      <h1 class="lg:text-3xl text-xl font-semibold mb-6 text-white text-center">Registrieren</h1>
+      <h1 class="lg:text-3xl text-xl font-semibold mb-6 text-center">Registrieren</h1>
       <!--<p class="mb-2 text-black text-lg"> Register to manage your account </p>-->
 
 
@@ -106,13 +106,13 @@
         </div> {% endcomment %}
         <button
           type="submit"
-          class="bg-gradient-to-br from-yellow-600 via-orange-500 to-yellow-600 py-3 rounded-md text-white text-xl  w-full mt-2 hover:shadow-2xl"
+          class="bg-gradient-to-br from-yellow-600 via-orange-500 to-yellow-600 py-3 rounded-md text-white text-xl  w-full mt-2 hover:text-white hover:shadow-2xl"
         >
         Registrieren
         </button>
         <div class="text-center mt-5 space-x-2">
           <p class="text-base">
-            Du hast schon einen Account? <a href="form-login.html"> Login </a>
+            Du hast schon einen Account? <a href="{% url "core:login_view" %}"> Login </a>
           </p>
         </div>
       </form>
