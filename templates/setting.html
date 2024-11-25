@@ -4,9 +4,59 @@
   
 {% block start %}
 
+<header class="shadow-2xl">
+    <div class="header_inner">
+        <div class="left-side">
+            <!-- Logo -->
+            <div id="logo" class="">
+                <div class="flex gap-2 items-center">
+                    <img src="{% static "assets/images/logo.svg" %}" alt="logo" class="w-5 h-5">
+                    <a href="{% url "core:home_view" %}">
+                      <b><h1 class="font-bold bg-gradient-to-br from-yellow-600 via-orange-500 to-yellow-600 bg-clip-text text-transparent">Sascha Schmittinger</h1></b>
+                    </a>
+                  </div>
+            </div>
+
+       
+        </div>
+        <div class="right-side lg:pr-4">
+
+         {% if user.is_staff %}
+
+            <a href="#">
+                <img class="w-8 h-8 rounded-full" src="{{ user_profile.profile_img.url }}" alt="Bild">
+            </a>
+            <div uk-drop="mode: click;offset:9" class="header_dropdown profile_dropdown border-t">
+                <ul>
+                    <li class="mb-4 -mt-2"><p> <small class="text-gray-800 font-bold ">User: {{ user.username }}</small> </p></li>
+                    <li><a href="{% url "core:home_view" %}"> zurück </a> </li> 
+                    <li><a href="/admin"> Admin </a> </li>              
+                    <li><a href="{% url "core:logout_view" %}"> Log Out</a></li>
+                </ul>
+            </div>
+
+          {% else %}  
+
+            <a href="#">
+                <img class="w-8 h-8 rounded-full" src="{{ user_profile.profile_img.url }}" alt="Bild">
+            </a>
+            <div uk-drop="mode: click;offset:9" class="header_dropdown profile_dropdown border-t">
+                <ul>
+                    <li class="mb-4 -mt-2"><p> <small class="text-gray-800 font-bold ">User: {{ user.username }}</small> </p></li>
+                    <li><a href="{% url "core:home_view" %}"> zurück </a> </li>              
+                    <li><a href="{% url "core:logout_view" %}"> Log Out</a></li>
+                </ul>
+            </div>
+
+          {% endif %}
+
+        </div>
+    </div>
+</header>
+
+
  <div class="container m-auto"> 
-    <a href="{% url "core:home_view" %}" class="text-red-500 hover:text-red-400 "> <- zur Homepage</a>
-    <h1 class="text-2xl leading-none text-gray-800 tracking-tight mt-4"> Einstellungen User:<span class="font-bold text-slate-800 ml-3">{{ user.username }}</span> </h1>
+
     {% comment %} <ul class="mt-5 -mr-3 flex-nowrap lg:overflow-hidden overflow-x-scroll uk-tab">
         <li class="uk-active"><a href="#">General</a></li>
         <li><a href="#">Profile</a></li>
@@ -16,28 +66,11 @@
         <li><a href="#">Billing</a></li>
         <li><a href="#">Security</a></li>
     </ul> {% endcomment %}
-    {% for message in messages %}
-      
-    <div role="alert" class="alert alert-{{ message.tags }} mb-1 mt-2">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          class="h-6 w-6 shrink-0 stroke-current">
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-        </svg>
-        <span>{{ message }}</span>
-    </div>
- 
-   {% endfor %}
 
-    <br>
-    <hr>
-        <div class="grid lg:grid-cols-3 mt-12 gap-8 ">
+{% include "components/messages.html" %}
+
+ 
+        <div class="grid lg:grid-cols-3 mt-2 gap-8 ">
           
             <div class="bg-white rounded-md lg:shadow-lg shadow col-span-3 mx-16 ">
 
@@ -47,12 +80,12 @@
                     
                         <div class="col-span-2">
                             <label for="about">Profilbild</label>  
-                            <img class="h-12 w-10" src="{{ user_profile.profile_img.url }}" alt="Bild">
+                            <img class="h-14 w-14" src="{{ user_profile.profile_img.url }}" alt="Bild">
                             <input type="file" name="image" value=" " class="shadow-none bg-white"></input>
                         </div> 
                         <div class="col-span-2">
                             <label for="about">Über mich</label>  
-                            <textarea id="about" name="bio" rows="3"  class="shadow-none bg-gray-100">           {{ user_profile.bio }} </textarea>
+                            <textarea id="about" name="bio" rows="3"  class="shadow-none bg-gray-100">             {{ user_profile.bio }} </textarea>
                         </div> 
                         <div class="col-span-2">
                             <label for=""> Wohnort</label>
@@ -62,7 +95,7 @@
                     </div> 
 
                     <div class="bg-gray-10 p-6 pt-0 flex justify-end space-x-3">
-                        <a href="{% url "core:home_view" %}" class="p-2 px-4 rounded bg-red-500 text-white hover:shadow-xl hover:text-white"> Abrechen</a>
+                        <a href="{% url "core:home_view" %}" class="p-2 px-4 rounded bg-red-500 text-white hover:shadow-xl hover:text-white"> zurück zur Homepage</a>
                         <button type="submit" class=" bg-green-700 rounded text-white px-2 hover:shadow-xl hover:text-white"> speichern </button>
                     </div>
                </form>

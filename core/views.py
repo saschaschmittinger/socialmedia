@@ -1,7 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User, auth
 from django.contrib.auth.decorators import login_required
-from .models import Profile
+from .models import Profile, Post
 from django.contrib import messages
 
 
@@ -9,8 +9,26 @@ from django.contrib import messages
 def home(request):
     title: str = "SSC SocialMedia"
     template: str = "index.html"
-    context: dict = {"title": title}
+    user_object = get_object_or_404(User, username=request.user.username)
+    user_profile = Profile.objects.get(user=user_object)
+
+    posts = Post.objects.all()
+    context: dict = {"title": title, "user_profile": user_profile, "posts": posts}
     return render(request, template, context)
+
+
+@login_required
+def upload(request):
+    if request.method == "POST":
+        user = request.user.username
+        image = request.FILES.get("image_upload")
+        capton = request.POST["capton"]
+        new_post = Post.objects.create(user=user, image=image, capton=capton)
+        new_post.save()
+        messages.success(request, "Post erfolgreich angelegt")
+        return redirect("core:home_view")
+    else:
+        return redirect("core:home_view")
 
 
 @login_required
@@ -42,7 +60,7 @@ def settings(request):
             user_profile.location = location
             user_profile.save()
             messages.success(request, "Daten wurden erfolgreich gespeichert")
-        return redirect("core:settings")
+        return redirect("core:home_view")
 
     context: dict = {"title": title, "user_profile": user_profile}
     return render(request, template, context)
@@ -102,7 +120,7 @@ def login_view(request):
     template: str = "signin.html"
 
     if request.user.is_authenticated:
-        messages.info(request, "Sie sind bereits angemeldet.")
+        messages.info(request, f"User: { user.username } ist bereits angemeldet.")
         return redirect("core:home_view")
 
     if request.method == "POST":
@@ -113,7 +131,7 @@ def login_view(request):
 
         if user is not None:
             auth.login(request, user)
-            messages.success(request, "Sie wurden erfolgreich angemeldet")
+            messages.success(request, f"Herlich willkommen { user.username }")
             return redirect("core:home_view")
         else:
             messages.error(request, "bitte überprüfen Sie Benutzername und Passwort")
@@ -127,3 +145,8 @@ def logout(request):
     auth.logout(request)
     messages.success(request, "Sie wurden erfolgreich abgemeldet")
     return redirect("core:login_view")
+
+
+@login_required
+def like_post(request):
+    pass

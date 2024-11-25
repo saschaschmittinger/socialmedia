@@ -11,12 +11,4 @@ typing_extensions==4.12.2
 urllib3==2.2.3
 
 
-# Time: 02:14:10
-
-
-# npm run watch:css
-
-
-# npx tailwindcss -i ./static/assets/css/input.css -o ./static/assets/css/tailwind.css --watch
-
- 
+# Time: 03:06:18
