@@ -2,7 +2,7 @@
 
 {% for message in messages %}
       
-<div role="alert" class="alert alert-{{ message.tags }} mb-4">
+<div role="alert" class="alert alert-{{ message.tags }} mb-4" id="message-{{ message.id }}" >
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
@@ -18,3 +18,17 @@
 </div>
 
 {% endfor %}
+
+<script>
+  // Warte 3 Sekunden und entferne die Nachrichten
+  setTimeout(function() {
+    let alerts = document.querySelectorAll('.alert');
+    alerts.forEach(function(alert) {
+      alert.style.opacity = 0;
+      setTimeout(function() {
+        alert.remove();
+      }, 500);
+    });
+  }, 3000);
+</script>
+

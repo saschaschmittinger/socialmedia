@@ -29,7 +29,7 @@ class Post(models.Model):
     no_of_likes = models.IntegerField(default=0)
 
     class Meta:
-        ordering = ("-created_at",)
+        ordering = ("-created_at", "-no_of_likes")
 
     def __str__(self):
         return self.user
