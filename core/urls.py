@@ -1,5 +1,14 @@
 from django.urls import path
-from .views import home, signup, login_view, logout, settings, upload, like_post
+from .views import (
+    home,
+    signup,
+    login_view,
+    logout,
+    settings,
+    upload,
+    like_post,
+    profile,
+)
 
 app_name = "core"
 
@@ -11,4 +20,5 @@ urlpatterns = [
     path("logout/", logout, name="logout_view"),
     path("upload/", upload, name="upload_view"),
     path("like-post/", like_post, name="like-post"),
+    path("profile/<str:pk>/", profile, name="profile"),
 ]

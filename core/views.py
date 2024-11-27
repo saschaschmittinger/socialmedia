@@ -169,3 +169,20 @@ def like_post(request):
         post.no_of_likes = post.no_of_likes - 1
         post.save()
         return redirect("core:home_view")
+
+
+def profile(request, pk):
+    title: str = "SSC Profile View"
+    template: str = "profile.html"
+    user_object = User.objects.get(username=pk)
+    user_profile = Profile.objects.get(user=user_object)
+    user_post = Post.objects.filter(user=pk)
+    user_post_lenght = len(user_post)
+    context: dict = {
+        "title": title,
+        "user_object": user_object,
+        "user_profile": user_profile,
+        "user_post": user_post,
+        "user_post_lenght": user_post_lenght,
+    }
+    return render(request, template, context)
