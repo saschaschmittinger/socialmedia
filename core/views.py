@@ -2,12 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User, auth
 from django.contrib.auth.decorators import login_required
 from .models import Profile, Post, LikePost
+from .services import get_author_profile_img
 from django.contrib import messages
-
-
-def get_author_profile_img(post):
-    profile = Profile.objects.get(user__username=post.user)
-    return profile.profile_img.url
 
 
 @login_required
