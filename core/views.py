@@ -5,14 +5,21 @@ from .models import Profile, Post, LikePost
 from django.contrib import messages
 
 
+def get_author_profile_img(post):
+    profile = Profile.objects.get(user__username=post.user)
+    return profile.profile_img.url
+
+
 @login_required
 def home(request):
     title: str = "SSC SocialMedia"
     template: str = "index.html"
     user_object = get_object_or_404(User, username=request.user.username)
     user_profile = Profile.objects.get(user=user_object)
-
     posts = Post.objects.all()
+
+    for post in posts:
+        post.author_profile_img = get_author_profile_img(post)
     context: dict = {"title": title, "user_profile": user_profile, "posts": posts}
     return render(request, template, context)
 
