@@ -175,7 +175,7 @@
   
             <!-- profile -->
 
-            {% if user.is_staff %}
+            {% if user.is_superuser %}
 
             <a href="#">
                 <img class="w-8 h-8 rounded-full" src="{{ user_profile.profile_img.url }}" alt="Bild">

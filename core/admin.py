@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile, Post
+from .models import Profile, Post, LikePost
 
 
 @admin.register(Profile)
@@ -23,3 +23,11 @@ class PostAdmin(admin.ModelAdmin):
         "updated_at",
     ]
     readonly_fields: list = ["created_at", "updated_at"]
+
+
+@admin.register(LikePost)
+class LikeAdmin(admin.ModelAdmin):
+    list_display: list = ["username", "post_id"]
+    list_filter: list = ["username", "post_id"]
+    fields: list = ["post_id", "username"]
+    readonly_fields: list = ["post_id"]

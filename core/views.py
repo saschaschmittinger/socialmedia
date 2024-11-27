@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User, auth
 from django.contrib.auth.decorators import login_required
-from .models import Profile, Post
+from .models import Profile, Post, LikePost
 from django.contrib import messages
 
 
@@ -149,4 +149,7 @@ def logout(request):
 
 @login_required
 def like_post(request):
-    pass
+    username = request.user.username
+    post_id = request.GET.get("post_id")
+    post = Post.objects.get(id=post_id)
+    like_filter = LikePost.objects.filter(post_id=post_id)
