@@ -10,5 +10,5 @@ urlpatterns = [
     path("login/", login_view, name="login_view"),
     path("logout/", logout, name="logout_view"),
     path("upload/", upload, name="upload_view"),
-    path("like-post/", like_post, name="like_post"),
+    path("like-post/", like_post, name="like-post"),
 ]
