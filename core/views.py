@@ -16,6 +16,7 @@ def home(request):
 
     for post in posts:
         post.author_profile_img = get_author_profile_img(post)
+
     context: dict = {"title": title, "user_profile": user_profile, "posts": posts}
     return render(request, template, context)
 
